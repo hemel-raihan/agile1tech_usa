@@ -5,11 +5,18 @@
 @endsection
 
 @section('content')
+@isset($custom_page)
+@include('frontend_theme.corporate.front_layout.vertical.banner',['custom_page'=>$custom_page])
+@endisset
+@isset($servicc)
+@include('frontend_theme.corporate.front_layout.vertical.banner',['servicc'=>$servicc])
+@endisset
+
 
                     @php
                     $page = \App\Models\Pagebuilder\Custompage::where([['type','=','main-page'],['status','=',true]])->orderBy('id','desc')->first();
                     @endphp
-
+<div class="container-sm">
 
 
                                 @if ($page->rightsidebar_id == 0 && $page->leftsidebar_id == 0)
@@ -105,11 +112,16 @@
                                 @endisset
 
 
+                                @isset($servicc)
+                                <p>{!!$servicc->body!!}</p>
+                                @endisset
+
+
 
                             </div>
                         </div>
 
-
+</div>
 
 
 @endsection()

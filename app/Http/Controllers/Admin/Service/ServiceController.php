@@ -55,8 +55,7 @@ class ServiceController extends Controller
                 'title' => 'required|unique:services',
                 'image' => 'max:1024',
                 'categories' => 'required',
-                'leftsidebar_id' => 'required',
-                'rightsidebar_id' => 'required',
+
             ]);
 
 
@@ -107,8 +106,8 @@ class ServiceController extends Controller
             'image' => $imagename,
             'body' => $request->body,
             'order' => $request->order,
-            'leftsidebar_id' => $request->leftsidebar_id,
-            'rightsidebar_id' => $request->rightsidebar_id,
+            // 'leftsidebar_id' => $request->leftsidebar_id,
+            // 'rightsidebar_id' => $request->rightsidebar_id,
             'status' => $status,
             'is_approved' => $is_approved,
             'meta_title' => $request->meta_title,
@@ -187,8 +186,8 @@ class ServiceController extends Controller
             'title' => 'required',
             'image' => 'max:1024',
             'categories' => 'required',
-            'leftsidebar_id' => 'required',
-            'rightsidebar_id' => 'required',
+            // 'leftsidebar_id' => 'required',
+            // 'rightsidebar_id' => 'required',
         ]);
 
         //get form image
@@ -240,13 +239,13 @@ class ServiceController extends Controller
 
         $service->update([
             'title' => $request->title,
-            'slug' => $request->slug,
+            'slug' => $slug,
             'admin_id' => Auth::id(),
             'image' => $imagename,
             'body' => $request->body,
             'order' => $request->order,
-            'leftsidebar_id' => $request->leftsidebar_id,
-            'rightsidebar_id' => $request->rightsidebar_id,
+            // 'leftsidebar_id' => $request->leftsidebar_id,
+            // 'rightsidebar_id' => $request->rightsidebar_id,
             'status' => $status,
             'is_approved' => $is_approved,
             'meta_title' => $request->meta_title,

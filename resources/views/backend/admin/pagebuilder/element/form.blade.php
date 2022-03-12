@@ -161,6 +161,28 @@
                     @endisset
 				</div>
 
+                @isset($element)
+                    <div class="form-group">
+						<label class="form-label">Container</label>
+						<select name="container" class="form-control form-select select2" data-bs-placeholder="Select Container">
+							<option value="">Select Container Type</option>
+							<option value="container-lg" {{($element->container == 'container-lg') ? 'selected' : ''}}  >Full width</option>
+							<option value="container-sm" {{($element->container == 'container-sm') ? 'selected' : ''}}>Box Layout</option>
+						</select>
+					</div>
+
+                    @else
+
+					<div class="form-group">
+						<label class="form-label">Container</label>
+						<select name="container" class="form-control form-select select2" data-bs-placeholder="Select Container">
+							<option value="">Select Page Type</option>
+							<option value="container-lg">Full width</option>
+							<option value="container-sm">Box Layout</option>
+						</select>
+					</div>
+                    @endisset
+
                 <div id="layout_type">
                     <div class="form-group">
                         @isset($element)

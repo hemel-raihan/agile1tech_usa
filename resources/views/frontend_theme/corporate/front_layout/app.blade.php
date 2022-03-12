@@ -60,7 +60,11 @@
         {{-- @if (!Request::is('default*') && !Request::is('blog/details*')  && !Request::is('gallery/all*'))
         @include('frontend_theme.corporate.front_layout.vertical.slider')
         @endif --}}
+        @if (!Request::is('default*') && !Request::is('blog/details*') && !Request::is('service/details*')  && !Request::is('gallery/all*'))
         @include('frontend_theme.corporate.front_layout.vertical.head_banner')
+    
+
+        @endif
 
         <!-- Slider end
 		============================================= -->
@@ -77,12 +81,12 @@
                 {{-- <div class="container-lg" style="background: #19a1dd;">
                     <div class="container-md" style="background: #f9fdff;"> --}}
                         <div class="body">
-                            <div class="{{$page->container}}">
+                            <div class="{{($page->container == 'container-sm') ? 'container-sm' : '' }}">
                                 <div class="main-div">
                                     <section id="content" style="background-image: url('{{asset('uploads/custompagephoto/'.$page->background_img)}}'); background: {{$page->background_img}}; margin-left: {{$page->left_margin}}; margin-right: {{$page->right_margin}};">
                                         <div class="content-wrap">
                                            <div class=" clearfix">
-                                                <div class="row gutter-40 col-mb-80">
+                                                {{-- <div class="row gutter-40 col-mb-80"> --}}
                                                     @if(!$page->leftsidebar_id == 0)
                                                     @php
                                                     $sidebars = \App\Models\Admin\Sidebar::where([['type','=','Left Side Bar'],['id','=',$page->leftsidebar_id]])->get();
@@ -113,7 +117,7 @@
                                                     @include('frontend_theme.corporate.front_layout.vertical.right_sidebar',['widgets'=>$widgets])
                                                     @endisset
                                                     @endif
-                                                </div>
+                                                {{-- </div> --}}
                                             </div>
                                         </div>
                                     </section>
@@ -152,7 +156,7 @@
 	<!-- Go To Top
 	============================================= -->
 	<div id="gotoTop" class="icon-angle-up"></div>
-    
+
     @include('frontend_theme.corporate.front_layout.vertical.scripts')
 
 

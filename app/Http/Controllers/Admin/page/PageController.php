@@ -73,7 +73,7 @@ class PageController extends Controller
           $imagename = $slug.'-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
 
             $pagePath = public_path('uploads/pagephoto');
-            Image::make($image)->resize(300, 200)->save($pagePath.'/'.$imagename);
+            Image::make($image)->resize(800, 500)->save($pagePath.'/'.$imagename);
 
            // $img->resize(900, 600)->save($pagePath.'/'.$imagename);
 

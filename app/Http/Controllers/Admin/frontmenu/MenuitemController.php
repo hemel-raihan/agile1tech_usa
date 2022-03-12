@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin\frontmenu;
 
+use App\Models\blog\Post;
 use App\Models\Admin\Page;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\blog\category;
+use App\Models\Service\Service;
 use App\Models\Teams\Teamcategory;
 use App\Models\Frontmenu\Frontmenu;
 use App\Http\Controllers\Controller;
@@ -23,9 +25,11 @@ class MenuitemController extends Controller
         $auth = Auth::guard('admin')->user();
         $pages = Page::all();
         $categories = category::where('parent_id', '=', 0)->get();
+        $posts = Post::all();
+        $services = Service::all();
         $contentcategories = Contentcategory::where('parent_id', '=', 0)->get();
         $teamcategories = Teamcategory::where('parent_id', '=', 0)->get();
-        return view('backend.admin.frontmenu.builder',compact('menu','auth','pages','categories','contentcategories','teamcategories'));
+        return view('backend.admin.frontmenu.builder',compact('menu','auth','pages','categories','posts','services','contentcategories','teamcategories'));
     }
 
     // public function show()
@@ -53,7 +57,8 @@ class MenuitemController extends Controller
 
         $contentcategory_id = null;
         $blogcategory_id = null;
-         $page_id = null;
+        $page_id = null;
+        $service_id = null;
         // foreach($request->input('slug') as $key => $value) {
         //     $slug = $request->input('slug')[$key];
 
@@ -160,6 +165,17 @@ class MenuitemController extends Controller
                 $page_id = null;
             }
 
+            if(Service::where('slug','=',$slugg)->count() > 0)
+            {
+                $service = Service::where('slug','=',$slugg)->first();
+                $service_id = $service->id;
+            }
+            else
+            {
+                $service_id = null;
+            }
+
+
 
 
         // foreach($blogcategory  as $blogcat)
@@ -194,6 +210,7 @@ class MenuitemController extends Controller
             'contentcategory_id' => $contentcategory_id,
             'blogcategory_id' => $blogcategory_id,
             'page_id' => $page_id,
+            'service_id' => $service_id,
         ]);
         }
 

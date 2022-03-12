@@ -277,30 +277,108 @@
             <div class="row col-mb-50">
                 <div class="col-lg-12">
 
+                    <div class="row col-mb-50">
+                        <div class="col-md-6">
+
+                            <div class="widget clearfix">
+
+                                @php
+                                $setting  = \App\Models\Admin\Setting::where([['id',1]])->orderBy('id','desc')->first();
+                                @endphp
+                                @isset($setting)
+                                <img width="200" src="{{asset('uploads/settings/'.$setting->logo)}}" alt="Image" class="footer-logo">
+                                @endisset
+
+
+
+                                <p style="color: {{$footer->text_color}}">{{$setting->company_slogan}}</p>
+
+                                {{-- <div style="background: url('images/world-map.png') no-repeat center center; background-size: 100%; color: {{$footer->text_color}};">
+                                    <address>
+                                        <strong>Headquarters:</strong><br>
+                                        {{$setting->contact}}<br>
+                                    </address>
+                                    <abbr title="Phone Number"><strong>Phone:</strong></abbr>{{$setting->phone}}<br>
+                                    <abbr title="Email Address"><strong>Email:</strong></abbr> {{$setting->email}}
+                                </div> --}}
+
+                            </div>
+
+                        </div>
+
+                        @isset($footer_menuitems)
+                @foreach ($footer_menuitems as $footer_menuitem)
+
+                <div class="col-lg-3 col-sm-6 pb-2 pb-sm-0">
+                    <div class="widget">
+                        <h4 style="color: {{$footer->text_color}}" class="widget-title pb-1">{{$footer_menuitem->title}}</h4>
+                        @if(!$footer_menuitem->childs->isEmpty())
+                        <ul>
+                            @foreach ($footer_menuitem->childs as $footer_item)
+                            @if ($footer_item->slug == null)
+                            <li><a style="color: {{$footer->text_color}}" href="{{$footer_item->url}}">{{$footer_item->title}}</a></li>
+                            @else
+                            <li><a style="color: {{$footer->text_color}}" href="{{route('page',$footer_item->slug)}}">{{$footer_item->title}}</a></li>
+                            @endif
+                            @endforeach
+                        </ul>
+                        @endif
+                    </div><!-- End .widget -->
+                </div><!-- End .col-lg-3 -->
+
+                @endforeach
+                @endisset
+
+                        {{-- <div class="col-md-4">
+                            <div class="widget widget_links clearfix">
+
+
+                                <ul>
+                                    @isset($footer_menuitems)
+                                    @foreach ($footer_menuitems as $footer_menuitem)
+                                    @if ($footer_menuitem->url == null)
+                                    <li><a style="color: {{$footer->text_color}}" href="{{route('page',$footer_menuitem->slug)}}">{{$footer_menuitem->title}}</a></li>
+                                    @endif
+                                    @endforeach
+                                    @endisset
+                                </ul>
+
+                            </div>
+
+                        </div> --}}
+
+                        {{-- <div class="col-md-4">
+
+                            <div class="widget widget_links clearfix">
+
+
+                                <ul>
+                                    @isset($footer_menuitems)
+                                    @foreach ($footer_menuitems as $footer_menuitem)
+                                    @if ($footer_menuitem->slug == null)
+                                    <li><a style="color: {{$footer->text_color}}" href="{{$footer_menuitem->url}}">{{$footer_menuitem->title}}</a></li>
+                                    @endif
+                                    @endforeach
+                                    @endisset
+                                </ul>
+
+                            </div>
+
+
+
+                        </div> --}}
+                    </div>
 
                 </div>
+
+
             </div>
 
-        </div>
+        </div><!-- .footer-widgets-wrap end -->
 
     </div>
 
-    <!-- Copyrights
-    ============================================= -->
-    <div id="copyright" style="background: black;">
-                <div class="container">
 
-
-                        <div style="color: {{$footer->text_color}}; text-align: center; padding-bottom: 30px; padding-top: 30px;">
-                            © Copyright 2020 - 2022   |   Colombia Fashion BD by Colombia Fashion   |   All Rights Reserved   |   Powered by <a href="https://datahostbd.com/">DataHost IT</a>
-                        </div>
-                        <div style="text-align: center; padding-bottom: 50px;">
-                            <img src="{{asset('assets/frontend/images/payment.webp')}}">
-                        </div>
-
-
-                </div>
-            </div>
 </footer>
 
 @endif

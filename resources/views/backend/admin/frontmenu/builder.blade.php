@@ -192,6 +192,58 @@
                                           </div>
 
 
+                                          {{-- <p style="background: #f3f8fb;">
+                                            <a class="btn" data-bs-toggle="collapse" href="#collapseExample22" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                              Blog Posts
+                                            </a>
+                                          </p>
+                                          <div class="collapse" id="collapseExample22">
+                                            <div class="card card-body">
+                                                <div class="transfer-double-list-content">
+                                                    <div class="transfer-double-list-main">
+                                                        <ul class="transfer-double-group-list-ul transfer-double-group-list-ul-1636878492751">
+                                                            @foreach($posts as $key => $post)
+                                                            <li class="transfer-double-group-list-li transfer-double-group-list-li-1636878492751">
+                                                                <div class="checkbox-group">
+                                                                    <input type="checkbox" value="{{$post->title}}" data-src="{{$post->id}}" data-id="{{$post->slug}}" name="postbox[]" class="checkbox-normal group-select-all-1636878492751" id="group_{{$key}}_1636878492754" /><label for="group_{{$key}}_1636878492754" class="group-name-1636878492754">{{$post->title}}</label>
+                                                                </div>
+                                                            </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
+                                                </div>
+
+                                                <button id="add_post" class="btn btn-primary">Add to Menu</button>
+                                            </div>
+                                          </div> --}}
+
+
+                                          <p style="background: #f3f8fb;">
+                                            <a class="btn" data-bs-toggle="collapse" href="#collapseExample23" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                              Services
+                                            </a>
+                                          </p>
+                                          <div class="collapse" id="collapseExample23">
+                                            <div class="card card-body">
+                                                <div class="transfer-double-list-content">
+                                                    <div class="transfer-double-list-main">
+                                                        <ul class="transfer-double-group-list-ul transfer-double-group-list-ul-1636878492751">
+                                                            @foreach($services as $key => $service)
+                                                            <li class="transfer-double-group-list-li transfer-double-group-list-li-1636878492751">
+                                                                <div class="checkbox-group">
+                                                                    <input type="checkbox" value="{{$service->title}}" data-src="{{$service->id}}" data-id="{{$service->slug}}" name="servicebox[]" class="checkbox-normal group-select-all-1636878492751" id="group_{{$key}}_1636878492755" /><label for="group_{{$key}}_1636878492755" class="group-name-1636878492755">{{$service->title}}</label>
+                                                                </div>
+                                                            </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
+                                                </div>
+
+                                                <button id="add_service" class="btn btn-primary">Add to Menu</button>
+                                            </div>
+                                          </div>
+
+
                                           <p style="background: #f3f8fb;">
                                             <a class="btn" data-bs-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample">
                                               Content Categories
@@ -730,6 +782,27 @@ for (var i=0, n=teamcategoryboxes.length;i<n;i++)
         $('#dd_handle').append(`<li class="dd-item" <?php foreach ($menu->menuItems as $item): ?> data-id="<?php echo $item["id"] ?>" <?php endforeach; ?> ><div class="pull-right item_actions"><a <?php foreach ($menu->menuItems as $item): ?> href="<?php route('admin.menuitem.destroy',['id'=>$menu->id,'menuId'=>$item->id]) ?>  <?php endforeach; ?>  " class="btn btn-danger waves effect" >
                                                                 <i class="fa fa-trash"></i>
                                                             </a></div><div class="dd-handle"><span>`+teamcategoryboxes[i].value+`</span> <input type="hidden" name="title[]" value="`+teamcategoryboxes[i].value+`"> <input type="hidden" name="id[]" value="`+teamcategoryboxes[i].getAttribute('data-src')+`"> <input type="hidden" name="slug[]" value="`+teamcategoryboxes[i].getAttribute('data-id')+`"> </div></li>`);
+
+                                                            iziToast.success({
+                title: 'Success',
+                message: 'Successfully add menu in the list',
+            });
+    }
+}
+});
+
+
+$('#add_service').click(function(){
+
+var serviceboxes = document.getElementsByName('servicebox[]');
+for (var i=0, n=serviceboxes.length;i<n;i++)
+{
+    if (serviceboxes[i].checked)
+    {
+
+        $('#dd_handle').append(`<li class="dd-item" <?php foreach ($menu->menuItems as $item): ?> data-id="<?php echo $item["id"] ?>" <?php endforeach; ?> ><div class="pull-right item_actions"><a <?php foreach ($menu->menuItems as $item): ?> href="<?php route('admin.menuitem.destroy',['id'=>$menu->id,'menuId'=>$item->id]) ?>  <?php endforeach; ?>  " class="btn btn-danger waves effect" >
+                                                                <i class="fa fa-trash"></i>
+                                                            </a></div><div class="dd-handle"><span>`+serviceboxes[i].value+`</span> <input type="hidden" name="title[]" value="`+serviceboxes[i].value+`"> <input type="hidden" name="id[]" value="`+serviceboxes[i].getAttribute('data-src')+`"> <input type="hidden" name="slug[]" value="`+serviceboxes[i].getAttribute('data-id')+`"> </div></li>`);
 
                                                             iziToast.success({
                 title: 'Success',

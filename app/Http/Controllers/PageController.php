@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Admin\Page;
 use Illuminate\Http\Request;
 use App\Models\blog\category;
-use App\Models\Frontmenu\Frontmenuitem;
+use App\Models\Service\Service;
 use App\Models\Teams\Teamcategory;
+use App\Models\Frontmenu\Frontmenuitem;
 use Illuminate\Support\Facades\Artisan;
 use App\Models\general_content\Contentcategory;
 
@@ -19,6 +20,7 @@ class PageController extends Controller
         $teamcategory = Teamcategory::all();
         $blogcategory = category::all();
         $pages = Page::all();
+        $services = Service::all();
 
         $menuitem = Frontmenuitem::where('slug',$slug)->firstOrFail();
 
@@ -35,19 +37,33 @@ class PageController extends Controller
 
         }
 
-        // $blogcategoryid = $menuitem->blogcategory_id;
-        // foreach($blogcategory  as $blogcat)
-        // {
-        //     if($blogcat->id == $blogcategoryid)
-        //     {
-        //         $blog = category::where('id',$blogcategoryid)->firstOrFail();
-        //         $blogposts = $blog->posts()->get();
-        //         Artisan::call('cache:clear');
+        $blogcategoryid = $menuitem->blogcategory_id;
+        foreach($blogcategory  as $blogcat)
+        {
+            if($blogcat->id == $blogcategoryid)
+            {
+                $blog = category::where('id',$blogcategoryid)->firstOrFail();
+                $blogposts = $blog->posts()->get();
+                Artisan::call('cache:clear');
 
-        //         return view('frontend_theme.default.default_pages',compact('blogposts','slug','blog'));
-        //     }
+                return view('frontend_theme.corporate.default-page',compact('blogposts','slug','blog'));
+            }
 
-        // }
+        }
+
+
+        $serviceid = $menuitem->service_id;
+        foreach($services  as $service)
+        {
+            if($service->id == $serviceid)
+            {
+                $servicc = Service::where('id',$serviceid)->firstOrFail();
+                //$blogposts = $servicc->posts()->get();
+                Artisan::call('cache:clear');
+                return view('frontend_theme.corporate.default-page',compact('servicc'));
+            }
+
+        }
 
         $contentcategoryid = $menuitem->contentcategory_id;
         foreach($contentcategory  as $contentcat)

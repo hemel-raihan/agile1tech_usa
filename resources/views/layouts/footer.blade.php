@@ -3,7 +3,7 @@
 				<div class="container">
 					<div class="row align-items-center flex-row-reverse">
 						<div class="col-md-12 col-sm-12 text-center">
-							 Copyright © 2022 <a href="#">colombiafashionbd</a>. Designed by <a href="https://datahostbd.com/"> Datahost IT </a> All rights reserved
+							 Copyright © 2022 <a href="#">agile1tech</a>. Designed by <a href="https://datahostbd.com/"> Datahost IT </a> All rights reserved
 						</div>
 					</div>
 				</div>

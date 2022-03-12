@@ -20,7 +20,7 @@
 
         @foreach ($page->pagebuilders as $pagebuilder)
         @if ($pagebuilder->status == 1)
-        <div class="{{$pagebuilder->container}} clearfix" style="background-color: {{$pagebuilder->background_color}}; background-image: url('{{asset('uploads/sectionpagephoto/'.$pagebuilder->background_img)}}');  border: {{$pagebuilder->border}} {{$pagebuilder->border_style}} {{$pagebuilder->border_color}};">
+        <div class="{{($pagebuilder->container == 'container-sm') ? 'container-sm' : '' }} clearfix" style="background-color: {{$pagebuilder->background_color}}; background-image: url('{{asset('uploads/sectionpagephoto/'.$pagebuilder->background_img)}}');  border: {{$pagebuilder->border}} {{$pagebuilder->border_style}} {{$pagebuilder->border_color}};">
 
             @if ($pagebuilder->title_show == 1)
             <div style="padding-top:20px;" class="heading-block center">
@@ -45,9 +45,10 @@
                 <div class="col-md-{{ ($key%2 == 0) ? 3 : ((!$key%2 == 0) ? 6 : 3) }}">
                 @endif
 
-                {{-- <div class="col-md-{{($pagebuilder->layout == 'one-col') ? 12 : 6}}"> --}}
+                {{-- <div class=""> --}}
 
-                    <div class="row col-mb-50">
+                    {{-- <div class="row col-mb-50"> --}}
+                        <div class="{{($element->container == 'container-sm') ? 'container-sm' : '' }}">
 
                         @if($element->module_type == 'Blog Post')
                         @if ($element->title)
@@ -107,7 +108,7 @@
                         @endif
                         @endif
                         @isset($category->posts)
-                        <div id="oc-portfolio" class="owl-carousel portfolio-carousel carousel-widget" data-margin="20" data-pagi="false" data-autoplay="5000" data-items-xs="1" data-items-sm="2" data-items-md="3" data-items-xl="4">
+                        <div id="oc-portfolio" class="owl-carousel portfolio-carousel carousel-widget" data-margin="20" data-pagi="false" data-autoplay="5000" data-items-xs="1" data-items-sm="2" data-items-md="3" data-items-xl="{{($element->layout == 'One Column') ? 1 : (($element->layout == 'Two Column') ? 2 : (($element->layout == 'Three Column') ? 3 : 4)) }}">
                         @foreach ($category->posts as $post)
                         @if ($post->status == 1)
 
@@ -320,6 +321,27 @@
                         @endisset
 
 
+                        @elseif($element->module_type == 'Service Post')
+                        @isset($serviceposts)
+                            <div id="oc-portfolio" class="owl-carousel portfolio-carousel carousel-widget" data-margin="20" data-pagi="false" data-autoplay="5000" data-items-xs="1" data-items-sm="1" data-items-md="3" data-items-xl="{{($element->layout == 'One Column') ? 1 : (($element->layout == 'Two Column') ? 2 : (($element->layout == 'Three Column') ? 3 : 4)) }}">
+                                @foreach ($serviceposts as $servicepost)
+                                <div class="portfolio-item">
+                                    <div class="portfolio-image">
+                                        <a href="{{route('service.details',$servicepost->id)}}">
+                                            <img src="{{asset('uploads/servicephoto/'.$servicepost->image)}}" alt="Open Imagination">
+                                        </a>
+                                    </div>
+                                    <div class="centered d-flex align-items-center justify-content-center"><a href="{{route('service.details',$servicepost->id)}}" style="color: #000; font-size: 24px;">{{$servicepost->title}}</a></div>
+                                    {{-- <div class="portfolio-desc">
+                                        <h3><a href="{{route('portfolio.posts',$portfoliocategory->id)}}">{{$post->title}}</a></h3>
+                                    </div> --}}
+                                </div>
+                                @endforeach
+                                </div>
+
+                        @endisset
+
+
                         @elseif($element->module_type == 'Price-Table Post')
                         @isset($priceposts)
                         @foreach ($priceposts as $pricepost)
@@ -472,11 +494,35 @@
                         @endif
 
                     </div>
+                    {{-- </div> --}}
 
                 </div>
                 @endforeach
-            </div>
 
+                {{-- <section id="particles-news-js" class="container-lg slider-element swiper_wrapper min-vh-60 min-vh-md-80">
+                    <div class="slider-inner">
+
+                        <div class="swiper-container swiper-parent">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide dark">
+                                    <div class="container">
+
+                                        <div class="slider-caption slider-caption-center">
+                                            <h2 data-animate="fadeInUp">AGILE1TECH CORP.</br>
+
+                                                PASSIONATE FOR THE RIGHT SOLUTION
+
+                                            </h2>
+
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide-bg"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section> --}}
+            </div>
 
             <div class="line"></div>
 
@@ -525,409 +571,67 @@
         </div>
         @endif
         @endforeach
-        </div>
 
-        {{-- <div class="section topmargin-lg">
-            <div class="container clearfix">
+<div class="container-sm">
+    <div class="center mb-5">
+        <h1 class="fw-bold display-4">Contact Us..</h1>
+    </div>
+    {{-- <div class="form-widget" data-loader="button" data-alert-type="inline"> --}}
 
-                <div class="heading-block center">
-                    <h2>Features that you are gonna Love</h2>
-                    <span>Canvas comes with 100+ Feature oriented Shortcodes that are easy to use too.</span>
-                </div>
+        <div class="row" >
+            <div class="col-6">
+                <p>Our mission is to help you make the right choice for
+                the right outcomes. That starts with an honest
+                conversation about your challenges. We look forward
+                to talking.</p>
 
-                <div class="row justify-content-center col-mb-50">
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="feature-box fbox-sm fbox-plain" data-animate="fadeIn">
-                            <div class="fbox-icon">
-                                <a href="#"><i class="icon-phone2"></i></a>
-                            </div>
-                            <div class="fbox-content">
-                                <h3>Responsive Layout</h3>
-                                <p>Powerful Layout with Responsive functionality that can be adapted to any screen size.</p>
-                            </div>
-                        </div>
-                    </div>
+                <p> <img width="50" src="{{asset('assets/frontend/images/Address.png')}}"> 10400 Eaton Place, Suite 105, Fairfax, VA 22030 </p>
+                <p> <img width="30" src="{{asset('assets/frontend/images/Phone.png')}}"> <span style="margin-left: 20px;"> 571-645 5899 </span></p>
 
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="feature-box fbox-sm fbox-plain" data-animate="fadeIn" data-delay="200">
-                            <div class="fbox-icon">
-                                <a href="#"><i class="icon-eye"></i></a>
-                            </div>
-                            <div class="fbox-content">
-                                <h3>Retina Ready Graphics</h3>
-                                <p>Looks beautiful &amp; ultra-sharp on Retina Displays with Retina Icons, Fonts &amp; Images.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="feature-box fbox-sm fbox-plain" data-animate="fadeIn" data-delay="400">
-                            <div class="fbox-icon">
-                                <a href="#"><i class="icon-star2"></i></a>
-                            </div>
-                            <div class="fbox-content">
-                                <h3>Powerful Performance</h3>
-                                <p>Optimized code that are completely customizable and deliver unmatched fast performance.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="feature-box fbox-sm fbox-plain" data-animate="fadeIn" data-delay="600">
-                            <div class="fbox-icon">
-                                <a href="#"><i class="icon-video"></i></a>
-                            </div>
-                            <div class="fbox-content">
-                                <h3>HTML5 Video</h3>
-                                <p>Canvas provides support for Native HTML5 Videos that can be added to a Full Width Background.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="feature-box fbox-sm fbox-plain" data-animate="fadeIn" data-delay="800">
-                            <div class="fbox-icon">
-                                <a href="#"><i class="icon-params"></i></a>
-                            </div>
-                            <div class="fbox-content">
-                                <h3>Parallax Support</h3>
-                                <p>Display your Content attractively using Parallax Sections that have unlimited customizable areas.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="feature-box fbox-sm fbox-plain" data-animate="fadeIn" data-delay="1000">
-                            <div class="fbox-icon">
-                                <a href="#"><i class="icon-fire"></i></a>
-                            </div>
-                            <div class="fbox-content">
-                                <h3>Endless Possibilities</h3>
-                                <p>Complete control on each &amp; every element that provides endless customization possibilities.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="feature-box fbox-sm fbox-plain" data-animate="fadeIn" data-delay="1200">
-                            <div class="fbox-icon">
-                                <a href="#"><i class="icon-bulb"></i></a>
-                            </div>
-                            <div class="fbox-content">
-                                <h3>Light &amp; Dark Color Schemes</h3>
-                                <p>Change your Website's Primary Scheme instantly by simply adding the dark class to the body.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="feature-box fbox-sm fbox-plain" data-animate="fadeIn" data-delay="1400">
-                            <div class="fbox-icon">
-                                <a href="#"><i class="icon-heart2"></i></a>
-                            </div>
-                            <div class="fbox-content">
-                                <h3>Boxed &amp; Wide Layouts</h3>
-                                <p>Stretch your Website to the Full Width or make it boxed to surprise your visitors.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="feature-box fbox-sm fbox-plain" data-animate="fadeIn" data-delay="1600">
-                            <div class="fbox-icon">
-                                <a href="#"><i class="icon-note"></i></a>
-                            </div>
-                            <div class="fbox-content">
-                                <h3>Extensive Documentation</h3>
-                                <p>We have covered each &amp; everything in our Documentation including Videos &amp; Screenshots.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.8003818461652!2d90.39779751536324!3d23.79012169317382!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c713baad70ab%3A0x1db8512cf4fe0bbf!2s5M%20INTERNATIONAL%20LTD.!5e0!3m2!1sen!2sbd!4v1645249159049!5m2!1sen!2sbd" width="600" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div>
-        </div>
+            <div class="col-6">
+                <form id="coming-soon-registration" class="mb-0" action="{{route('contact.store')}}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-process"></div>
+                    <div class="row form-section px-4 py-5 bg-white rounded shadow-lg">
+                        <div class="col-12 form-group">
+                            <label>Name:</label>
+                            <input type="text" name="name" id="landing-enquiry-name" class="form-control form-control-lg required" value="" placeholder="John Doe">
+                        </div>
+                        <div class="col-12 form-group">
+                            <label>Email:</label>
+                            <input type="email" name="email" id="landing-enquiry-email" class="form-control form-control-lg required" value="" placeholder="user@company.com">
+                        </div>
+                        <div class="col-12 form-group">
+                            <label>Phone:</label>
+                            <input type="tel" name="phone" id="landing-enquiry-phone" class="form-control form-control-lg required" value="" placeholder="123-45-678" maxlength="12">
+                        </div>
+                        <div class="col-12 form-group">
+                            <label>Message</label>
+                            <textarea name="msg" id="landing-enquiry-phone" class="form-control form-control-lg required" value="" placeholder="Write your message" ></textarea>
+                        </div>
+                        <div class="col-12 d-none">
+                            <input type="text" id="landing-enquiry-botcheck" name="landing-enquiry-botcheck" value="" />
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" name="landing-enquiry-submit" class="btn w-100 text-white bg-color rounded-3 py-3 fw-semibold text-uppercase mt-2">Get Notified</button>
+                        </div>
 
-        <div class="container clearfix">
-
-            <div class="heading-block center">
-                <h3>Some of our <span>Featured</span> Works</h3>
-                <span>We have worked on some Awesome Projects that are worth boasting of.</span>
-            </div>
-
-            <div id="oc-portfolio" class="owl-carousel portfolio-carousel carousel-widget" data-margin="1" data-pagi="false" data-autoplay="5000" data-items-xs="1" data-items-sm="2" data-items-md="3" data-items-xl="4">
-
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <a href="portfolio-single.html">
-                            <img src="images/portfolio/4/1.jpg" alt="Open Imagination">
-                        </a>
-                        <div class="bg-overlay">
-                            <div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="350">
-                                <a href="images/portfolio/full/1.jpg" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeInDownSmall" data-hover-animate-out="fadeInUpSmall" data-hover-speed="350" data-lightbox="image"><i class="icon-line-plus"></i></a>
-                                <a href="portfolio-single.html" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeInDownSmall" data-hover-animate-out="fadeInUpSmall" data-hover-speed="350"><i class="icon-line-ellipsis"></i></a>
-                            </div>
-                            <div class="bg-overlay-bg dark" data-hover-animate="fadeIn" data-hover-speed="350"></div>
-                        </div>
+                        <input type="hidden" name="prefix" value="landing-enquiry-">
                     </div>
-                    <div class="portfolio-desc">
-                        <h3><a href="portfolio-single.html">Open Imagination</a></h3>
-                        <span><a href="#">Media</a>, <a href="#">Icons</a></span>
-                    </div>
-                </div>
-
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <a href="portfolio-single.html">
-                            <img src="images/portfolio/4/2.jpg" alt="Locked Steel Gate">
-                        </a>
-                        <div class="bg-overlay">
-                            <div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="350">
-                                <a href="images/portfolio/full/2.jpg" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeInDownSmall" data-hover-animate-out="fadeInUpSmall" data-hover-speed="350" data-lightbox="image"><i class="icon-line-plus"></i></a>
-                                <a href="portfolio-single.html" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeInDownSmall" data-hover-animate-out="fadeInUpSmall" data-hover-speed="350"><i class="icon-line-ellipsis"></i></a>
-                            </div>
-                            <div class="bg-overlay-bg dark" data-hover-animate="fadeIn" data-hover-speed="350"></div>
-                        </div>
-                    </div>
-                    <div class="portfolio-desc">
-                        <h3><a href="portfolio-single.html">Locked Steel Gate</a></h3>
-                        <span><a href="#">Illustrations</a></span>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <a href="#">
-                            <img src="images/portfolio/4/3.jpg" alt="Mac Sunglasses">
-                        </a>
-                        <div class="bg-overlay">
-                            <div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="350">
-                                <a href="https://vimeo.com/89396394" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeInDownSmall" data-hover-animate-out="fadeInUpSmall" data-hover-speed="350" data-lightbox="iframe"><i class="icon-line-play"></i></a>
-                                <a href="portfolio-single.html" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeInDownSmall" data-hover-animate-out="fadeInUpSmall" data-hover-speed="350"><i class="icon-line-ellipsis"></i></a>
-                            </div>
-                            <div class="bg-overlay-bg dark" data-hover-animate="fadeIn" data-hover-speed="350"></div>
-                        </div>
-                    </div>
-                    <div class="portfolio-desc">
-                        <h3><a href="portfolio-single-video.html">Mac Sunglasses</a></h3>
-                        <span><a href="#">Graphics</a>, <a href="#">UI Elements</a></span>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <a href="#">
-                            <img src="images/portfolio/4/4.jpg" alt="Morning Dew">
-                        </a>
-                        <div class="bg-overlay" data-lightbox="gallery">
-                            <div class="bg-overlay-content dark" data-hover-animate="fadeIn">
-                                <a href="images/portfolio/full/4.jpg" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeInDownSmall" data-hover-animate-out="fadeOutUpSmall" data-hover-speed="350" data-lightbox="gallery-item"><i class="icon-line-stack-2"></i></a>
-                                <a href="images/portfolio/full/4-1.jpg" class="d-none" data-lightbox="gallery-item"></a>
-                                <a href="portfolio-single.html" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeInDownSmall" data-hover-animate-out="fadeOutUpSmall" data-hover-speed="350"><i class="icon-line-ellipsis"></i></a>
-                            </div>
-                            <div class="bg-overlay-bg dark" data-hover-animate="fadeIn"></div>
-                        </div>
-                    </div>
-                    <div class="portfolio-desc">
-                        <h3><a href="portfolio-single-gallery.html">Morning Dew</a></h3>
-                        <span><a href="#">Icons</a>, <a href="#">Illustrations</a></span>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <a href="portfolio-single.html">
-                            <img src="images/portfolio/4/5.jpg" alt="Console Activity">
-                        </a>
-                        <div class="bg-overlay">
-                            <div class="bg-overlay-content dark" data-hover-animate="fadeIn">
-                                <a href="images/portfolio/full/5.jpg" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeInDownSmall" data-hover-animate-out="fadeOutUpSmall" data-hover-speed="350" data-lightbox="image" title="Image"><i class="icon-line-plus"></i></a>
-                                <a href="portfolio-single.html" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeInDownSmall" data-hover-animate-out="fadeOutUpSmall" data-hover-speed="350"><i class="icon-line-ellipsis"></i></a>
-                            </div>
-                            <div class="bg-overlay-bg dark" data-hover-animate="fadeIn"></div>
-                        </div>
-                    </div>
-                    <div class="portfolio-desc">
-                        <h3><a href="portfolio-single.html">Console Activity</a></h3>
-                        <span><a href="#">UI Elements</a>, <a href="#">Media</a></span>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <a href="portfolio-single-gallery.html">
-                            <img src="images/portfolio/4/6.jpg" alt="Shake It!">
-                        </a>
-                        <div class="bg-overlay" data-lightbox="gallery">
-                            <div class="bg-overlay-content dark" data-hover-animate="fadeIn">
-                                <a href="images/portfolio/full/6.jpg" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeInDownSmall" data-hover-animate-out="fadeOutUpSmall" data-hover-speed="350" data-lightbox="gallery-item"><i class="icon-line-stack-2"></i></a>
-                                <a href="images/portfolio/full/6-1.jpg" class="d-none" data-lightbox="gallery-item"></a>
-                                <a href="images/portfolio/full/6-2.jpg" class="d-none" data-lightbox="gallery-item"></a>
-                                <a href="images/portfolio/full/6-3.jpg" class="d-none" data-lightbox="gallery-item"></a>
-                                <a href="portfolio-single-gallery.html" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeInDownSmall" data-hover-animate-out="fadeOutUpSmall" data-hover-speed="350"><i class="icon-line-ellipsis"></i></a>
-                            </div>
-                            <div class="bg-overlay-bg dark" data-hover-animate="fadeIn"></div>
-                        </div>
-                    </div>
-                    <div class="portfolio-desc">
-                        <h3><a href="portfolio-single-gallery.html">Shake It!</a></h3>
-                        <span><a href="#">Illustrations</a>, <a href="#">Graphics</a></span>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <a href="portfolio-single-video.html">
-                            <img src="images/portfolio/4/7.jpg" alt="Backpack Contents">
-                        </a>
-                        <div class="bg-overlay">
-                            <div class="bg-overlay-content dark" data-hover-animate="fadeIn">
-                                <a href="https://www.youtube.com/watch?v=kuceVNBTJio" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeInDownSmall" data-hover-animate-out="fadeOutUpSmall" data-hover-speed="350" data-lightbox="iframe"><i class="icon-line-play"></i></a>
-                                <a href="portfolio-single.html" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeInDownSmall" data-hover-animate-out="fadeOutUpSmall" data-hover-speed="350"><i class="icon-line-ellipsis"></i></a>
-                            </div>
-                            <div class="bg-overlay-bg dark" data-hover-animate="fadeIn"></div>
-                        </div>
-                    </div>
-                    <div class="portfolio-desc">
-                        <h3><a href="portfolio-single-video.html">Backpack Contents</a></h3>
-                        <span><a href="#">UI Elements</a>, <a href="#">Icons</a></span>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <a href="portfolio-single.html">
-                            <img src="images/portfolio/4/8.jpg" alt="Sunset Bulb Glow">
-                        </a>
-                        <div class="bg-overlay">
-                            <div class="bg-overlay-content dark" data-hover-animate="fadeIn">
-                                <a href="images/portfolio/full/8.jpg" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeInDownSmall" data-hover-animate-out="fadeOutUpSmall" data-hover-speed="350" data-lightbox="image" title="Image"><i class="icon-line-plus"></i></a>
-                                <a href="portfolio-single.html" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeInDownSmall" data-hover-animate-out="fadeOutUpSmall" data-hover-speed="350"><i class="icon-line-ellipsis"></i></a>
-                            </div>
-                            <div class="bg-overlay-bg dark" data-hover-animate="fadeIn"></div>
-                        </div>
-                    </div>
-                    <div class="portfolio-desc">
-                        <h3><a href="portfolio-single.html">Sunset Bulb Glow</a></h3>
-                        <span><a href="#">Graphics</a></span>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="section topmargin-sm mb-0">
-
-            <div class="container clearfix">
-
-                <div class="heading-block center">
-                    <h3>Testimonials</h3>
-                    <span>Check out some of our Client Reviews</span>
-                </div>
-
-                <ul class="testimonials-grid grid-1 grid-md-2 grid-lg-3">
-                    <li class="grid-item">
-                        <div class="testimonial">
-                            <div class="testi-image">
-                                <a href="#"><img src="images/testimonials/1.jpg" alt="Customer Testimonails"></a>
-                            </div>
-                            <div class="testi-content">
-                                <p>Incidunt deleniti blanditiis quas aperiam recusandae consequatur ullam quibusdam cum libero illo rerum repellendus!</p>
-                                <div class="testi-meta">
-                                    John Doe
-                                    <span>XYZ Inc.</span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="grid-item">
-                        <div class="testimonial">
-                            <div class="testi-image">
-                                <a href="#"><img src="images/testimonials/2.jpg" alt="Customer Testimonails"></a>
-                            </div>
-                            <div class="testi-content">
-                                <p>Natus voluptatum enim quod necessitatibus quis expedita harum provident eos obcaecati id culpa corporis molestias.</p>
-                                <div class="testi-meta">
-                                    Collis Ta'eed
-                                    <span>Envato Inc.</span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="grid-item">
-                        <div class="testimonial">
-                            <div class="testi-image">
-                                <a href="#"><img src="images/testimonials/7.jpg" alt="Customer Testimonails"></a>
-                            </div>
-                            <div class="testi-content">
-                                <p>Fugit officia dolor sed harum excepturi ex iusto magnam asperiores molestiae qui natus obcaecati facere sint amet.</p>
-                                <div class="testi-meta">
-                                    Mary Jane
-                                    <span>Google Inc.</span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="grid-item">
-                        <div class="testimonial">
-                            <div class="testi-image">
-                                <a href="#"><img src="images/testimonials/3.jpg" alt="Customer Testimonails"></a>
-                            </div>
-                            <div class="testi-content">
-                                <p>Similique fugit repellendus expedita excepturi iure perferendis provident quia eaque. Repellendus, vero numquam?</p>
-                                <div class="testi-meta">
-                                    Steve Jobs
-                                    <span>Apple Inc.</span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="grid-item">
-                        <div class="testimonial">
-                            <div class="testi-image">
-                                <a href="#"><img src="images/testimonials/4.jpg" alt="Customer Testimonails"></a>
-                            </div>
-                            <div class="testi-content">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus, perspiciatis illum totam dolore deleniti labore.</p>
-                                <div class="testi-meta">
-                                    Jamie Morrison
-                                    <span>Adobe Inc.</span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="grid-item">
-                        <div class="testimonial">
-                            <div class="testi-image">
-                                <a href="#"><img src="images/testimonials/8.jpg" alt="Customer Testimonails"></a>
-                            </div>
-                            <div class="testi-content">
-                                <p>Porro dolorem saepe reiciendis nihil minus neque. Ducimus rem necessitatibus repellat laborum nemo quod.</p>
-                                <div class="testi-meta">
-                                    Cyan Ta'eed
-                                    <span>Tutsplus</span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-
+                </br>
+                </br>
+                </form>
             </div>
 
         </div>
+</div>
 
-        <div class="container clearfix">
 
-            <div id="oc-clients" class="owl-carousel owl-carousel-full image-carousel carousel-widget" data-margin="30" data-loop="true" data-nav="false" data-autoplay="5000" data-pagi="false" data-items-xs="2" data-items-sm="3" data-items-md="4" data-items-lg="5" data-items-xl="6" style="padding: 20px 0;">
+        </div>
 
-                <div class="oc-item"><a href="http://logofury.com/"><img src="images/clients/1.png" alt="Clients"></a></div>
-                <div class="oc-item"><a href="http://logofury.com/"><img src="images/clients/2.png" alt="Clients"></a></div>
-                <div class="oc-item"><a href="http://logofury.com/"><img src="images/clients/3.png" alt="Clients"></a></div>
-                <div class="oc-item"><a href="http://logofury.com/"><img src="images/clients/4.png" alt="Clients"></a></div>
-                <div class="oc-item"><a href="http://logofury.com/"><img src="images/clients/5.png" alt="Clients"></a></div>
-                <div class="oc-item"><a href="http://logofury.com/"><img src="images/clients/6.png" alt="Clients"></a></div>
-                <div class="oc-item"><a href="http://logofury.com/"><img src="images/clients/7.png" alt="Clients"></a></div>
-                <div class="oc-item"><a href="http://logofury.com/"><img src="images/clients/8.png" alt="Clients"></a></div>
-                <div class="oc-item"><a href="http://logofury.com/"><img src="images/clients/9.png" alt="Clients"></a></div>
-                <div class="oc-item"><a href="http://logofury.com/"><img src="images/clients/10.png" alt="Clients"></a></div>
 
-            </div>
-
-        </div> --}}
 
 
 @endsection()

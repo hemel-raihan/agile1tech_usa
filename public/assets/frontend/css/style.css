@@ -271,7 +271,8 @@ blockquote,
 address,
 table,
 fieldset,
-form { margin-bottom: 30px; }
+form { margin-bottom: 30px;
+    list-style-type: none;}
 
 small { font-family: 'Lato', sans-serif; }
 
@@ -6687,7 +6688,7 @@ body:not(.has-plugin-html5video) .video-wrap video {
 
 .content-wrap {
 	position: relative;
-	padding: 80px 0;
+	padding: 0px 0;
 	overflow: hidden;
 }
 
@@ -6832,6 +6833,11 @@ body:not(.device-touch) .grid-container {
 	#particles-js
 {
     /* height: 100%; */
+    background: #192462;
+}
+
+#particles-news-js
+{
     background: #192462;
 }
 
@@ -7015,7 +7021,8 @@ body:not(.device-touch) .portfolio {
 .portfolio-item .portfolio-image > a,
 .portfolio-item .portfolio-image img {
 	display: block;
-	width: 100%;
+	/* width: 100%; */
+    width: 90%;
 	height: auto;
 }
 

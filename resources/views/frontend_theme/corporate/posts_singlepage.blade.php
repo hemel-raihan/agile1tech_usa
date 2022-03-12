@@ -26,9 +26,11 @@
 		{{-- <section id="content">
 			<div class="content-wrap">
 				<div class="container clearfix"> --}}
+@isset($service)
+@include('frontend_theme.corporate.front_layout.vertical.banner',['servicc'=>$service])
+@endisset
 
-
-
+<div class="container-sm">
 
                         @isset($portfolio)
                         <!-- Portfolio Single Image
@@ -115,16 +117,16 @@
                         <div class="postcontent col-lg-6">
                         @endif
                     {{-- <div class="col-lg-8 portfolio-single-image"> --}}
-                        <a href="#"><img src="{{asset('uploads/servicephoto/'.$service->image)}}" alt="Image"></a>
+                        {{-- <a href="#"><img src="{{asset('uploads/servicephoto/'.$service->image)}}" alt="Image"></a> --}}
                     {{-- </div><!-- .portfolio-single-image end --> --}}
 
                     <!-- Portfolio Single Content
                     ============================================= -->
                     {{-- <div class="col-lg-4 portfolio-single-content"> --}}
 
-                        <div class="fancy-title title-bottom-border">
+                        {{-- <div class="fancy-title title-bottom-border">
                             <h2>Project Info:</h2>
-                        </div>
+                        </div> --}}
                         <p>{!!$service->body!!}</p>
                         <!-- Portfolio Single - Description End -->
 
@@ -147,13 +149,13 @@
                              <a href="{{route('service.details',$servicecategorypost->id)}}">
                                  <img src="{{asset('uploads/servicephoto/'.$servicecategorypost->image)}}" alt="Open Imagination">
                              </a>
-                             <div class="bg-overlay">
+                             {{-- <div class="bg-overlay">
                                  <div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="350">
                                      <a href="{{asset('uploads/servicephoto/'.$servicecategorypost->image)}}" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeInDownSmall" data-hover-animate-out="fadeInUpSmall" data-hover-speed="350" data-lightbox="image"><i class="icon-line-plus"></i></a>
                                      <a href="#" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeInDownSmall" data-hover-animate-out="fadeInUpSmall" data-hover-speed="350"><i class="icon-line-ellipsis"></i></a>
                                  </div>
                                  <div class="bg-overlay-bg dark" data-hover-animate="fadeIn" data-hover-speed="350"></div>
-                             </div>
+                             </div> --}}
                          </div>
                          <div class="portfolio-desc">
                              <h3><a href="{{route('service.details',$servicecategorypost->id)}}">{{$servicecategorypost->title}}</a></h3>
@@ -546,7 +548,7 @@
 
 
 
-
+                            </div>
 
 
 

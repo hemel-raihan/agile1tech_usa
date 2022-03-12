@@ -140,16 +140,7 @@
                         @enderror
 					</div>
 
-                    <div class="form-group">
-						<label class="form-label">Category Image</label>
-						<!-- <input id="demo" type="file" name="image" accept=".jpg, .png, image/jpeg, image/png" multiple="" class="ff_fileupload_hidden"> -->
-                        <input type="file" data-height="100" class="dropify form-control @error('image') is-invalid @enderror" data-default-file="{{ isset($servicecategory) ? asset('uploads/servicecategory_photo/'.$servicecategory->image) : '' }}" name="image">
-                        @error('image')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{$message}}</strong>
-                        </span>
-                        @enderror
-					</div>
+
 
                     <div class="form-group">
 						<label for="exampleInputContent">Post Description</label>
@@ -290,7 +281,16 @@
 
                     @endisset
 
-
+                    <div class="form-group">
+						<label class="form-label">Category Image</label>
+						<!-- <input id="demo" type="file" name="image" accept=".jpg, .png, image/jpeg, image/png" multiple="" class="ff_fileupload_hidden"> -->
+                        <input type="file" class="dropify form-control @error('image') is-invalid @enderror" data-default-file="{{ isset($servicecategory) ? asset('uploads/servicecategory_photo/'.$servicecategory->image) : '' }}" name="image">
+                        @error('image')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{$message}}</strong>
+                        </span>
+                        @enderror
+					</div>
 
 
 
